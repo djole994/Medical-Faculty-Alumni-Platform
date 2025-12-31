@@ -1,58 +1,64 @@
-🎓 Medical Faculty Alumni Platform
+# 🎓 Medical Faculty Alumni Platform
+
 A centralized digital platform connecting students and graduates of the Medical Faculty.
 
-This project was developed as a modern solution for organizing the Alumni community, enabling former students to stay connected, track scientific events, and share professional opportunities.
+This project was developed as a modern solution for organizing the Alumni community—helping former students stay connected, follow scientific events, and share professional opportunities.
 
+---
 
-📖 About the Project
-The Alumni Platform transforms how the Medical Faculty interacts with its graduates. Replacing outdated lists, the application offers an interactive experience where users can:
+## 📖 About the Project
 
-Create professional profiles and become verified members of the organization.
+The Alumni Platform transforms how the Medical Faculty interacts with its graduates.  
+Replacing outdated lists and manual workflows, the application provides a modern, interactive experience where users can:
 
-Visualize global presence via an interactive world map.
+- ✅ Create professional profiles and become **verified members** of the organization  
+- 🌍 Visualize global Alumni presence via an **interactive world map**  
+- 🗓️ Register online for **congresses and educational events**  
+- 💼 Access an exclusive **job board** and read inspiring **Alumni Stories**  
+- 💳 Manage memberships through an integrated **financial module**  
+- ⚙️ Benefit from automation (**geolocation, verification**) and scalability (**data caching**)  
 
-Register online for congresses and educational events.
+---
 
-Access an exclusive job board and read successful "Alumni Stories".
+## 🛠 Tech Stack
 
-Manage memberships through an integrated financial module.
+### Backend
+- **.NET 8 (ASP.NET Core Web API)** — service-oriented architecture  
+- **Entity Framework Core** — Code-First approach  
+- **SQL Server** — relational database  
+- **Dependency Injection** + **Repository Pattern**
 
-The system focuses on automation (geolocation, verification) and scalability (data caching).
+### Frontend
+- **React** — SPA (Single Page Application)  
+- **Axios** — HTTP client  
+- **Leaflet / React-Leaflet** — map rendering
 
-🛠 Tech Stack
-Backend:
+### Integrations
+- **Nominatim (OpenStreetMap)** — location geocoding  
+- **Photon API** — type-ahead city search & suggestions  
 
-.NET 8 (ASP.NET Core Web API) - Service-oriented architecture.
+---
 
-Entity Framework Core - Code-first database approach.
+## 🚀 Key Challenge: Intelligent Geocoding System
 
-SQL Server - Relational database management.
+One of the biggest engineering challenges was mapping users worldwide **without overloading external APIs**, while still being tolerant to typos and imperfect data entry.
 
-Dependency Injection & Repository Pattern.
+To solve this, I implemented a **Hybrid Caching Strategy** with fallback logic:
 
-Frontend:
+1. **Check the local `GeoCache`** first  
+2. If missing, request coordinates from **Nominatim API**  
+3. If the API can’t resolve the city (e.g., typo), the system:
+   - falls back to **Country coordinates**
+   - flags the profile for **manual admin review**
 
-React - SPA (Single Page Application).
+### Geocoding Workflow Diagram
+> *(Add diagram image here)*  
+> Example:
+> `docs/images/geocoding-workflow.png`
 
-Axios - HTTP client.
+---
 
-Leaflet / React-Leaflet - For map rendering.
+## 📌 Notes
+- External APIs are protected from abuse via caching and fallback rules.
+- Failed/uncertain locations are never silently accepted—they’re tracked for admin verification.
 
-Integrations:
-
-Nominatim (OpenStreetMap) - For location geocoding.
-
-Photon API - For type-ahead city search and suggestions.
-
-🚀 Key Challenge: Intelligent Geocoding System
-One of the significant engineering challenges was mapping users without overloading external APIs while maintaining tolerance for typos and data entry errors.
-
-I implemented a "Hybrid Caching Strategy" with Fallback logic:
-
-The system first checks the local GeoCache.
-
-If the location is missing, it consults the Nominatim API.
-
-If the API fails to recognize the city (e.g., due to a typo), the system automatically uses Country coordinates as a fallback mechanism and flags the entry for manual admin review.
-
-Geocoding Workflow Diagram
