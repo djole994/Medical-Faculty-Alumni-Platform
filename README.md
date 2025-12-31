@@ -2,7 +2,7 @@
 
 A centralized digital platform connecting students and graduates of the Medical Faculty.
 
-This project was developed as a modern solution for organizing the Alumni community—helping former students stay connected, follow scientific events, and share professional opportunities.
+This project was developed as a modern solution for organizing the Alumni community-helping former students stay connected, follow scientific events, and share professional opportunities.
 
 ---
 
