@@ -57,8 +57,11 @@ To solve this, I implemented a **Hybrid Caching Strategy** with smart fallback l
 #### Geocoding Workflow Diagram
 ![Geocoding Workflow](docs/images/geocoding-workflow.png)
 
----
-
+### 💡 Why this approach? (Project Constraints & Quality Assurance)
+This architecture was specifically chosen to meet two critical client requirements:
+1.  **Zero-Cost Operation:** The client required a sustainable system without recurring monthly costs (e.g., Google Maps API billing). Using Nominatim (OpenStreetMap) solved this but required strict rate-limiting and caching.
+2.  **100% Data Integrity:** While automation handles 95% of cases, the "Admin Review" feature ensures that no user is ever lost or mapped incorrectly due to API limitations. This **Human-in-the-Loop** approach guarantees a pristine alumni directory.
+3.  
 ## 📌 Notes
 - External APIs are protected from abuse via caching and fallback rules.
 - Failed/uncertain locations are never silently accepted—they’re tracked for admin verification.
