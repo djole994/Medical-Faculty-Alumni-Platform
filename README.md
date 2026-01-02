@@ -47,6 +47,17 @@ One of the primary engineering goals was to map users worldwide accurately witho
 #### Geocoding Workflow Diagram
 ![Smart Geocoding Workflow Diagram](assets/diagrams/geocoding-flowchart.svg)
 
+### 🔎 Key code (jump to implementation)
+
+- 🧠 **Geocoding core:** [`GeocodingService.ResolveLocationAsync`](Backend/src/AlumniApi/Services/Geocoding/Geocoding.cs)
+- 🧩 **Cache key generator:** [`StringHelper.GenerateSearchKey`](Backend/src/AlumniApi/Helpers/StringHelper.cs)
+- 🧭 **Where it's used:** [`MembershipController.SubmitApplication`](Backend/src/AlumniApi/Controllers/MembershipController.cs)
+- 🌍 **Map endpoint:** [`MembershipController.GetMap`](Backend/src/AlumniApi/Controllers/MembershipController.cs)
+- ⚙️ **HttpClient setup:** [`Program.cs` (AddHttpClient)](Backend/src/AlumniApi/Program.cs)
+
+➡️ Details: [`docs/geocoding.md`](docs/geocoding.md)
+
+
 ➡️ Details: [docs/geocoding.md](docs/geocoding.md)
 
 
