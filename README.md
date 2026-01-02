@@ -49,11 +49,11 @@ One of the primary engineering goals was to map users worldwide accurately witho
 
 ### 🔎 Key code (jump to implementation)
 
-- 🧠 **Geocoding core:** [`GeocodingService.ResolveLocationAsync`](Backend/src/AlumniApi/Services/Geocoding/Geocoding.cs)
-- 🧩 **Cache key generator:** [`StringHelper.GenerateSearchKey`](Backend/src/AlumniApi/Helpers/StringHelper.cs)
-- 🧭 **Where it's used:** [`MembershipController.SubmitApplication`](Backend/src/AlumniApi/Controllers/MembershipController.cs)
-- 🌍 **Map endpoint:** [`MembershipController.GetMap`](Backend/src/AlumniApi/Controllers/MembershipController.cs)
-- ⚙️ **HttpClient setup:** [`Program.cs` (AddHttpClient)](Backend/src/AlumniApi/Program.cs)
+- 🧠 **Geocoding core:** [`GeocodingService.ResolveLocationAsync`](backend/src/AlumniApi/Services/Geocoding/Geocoding.cs)
+- 🧩 **Cache key generator:** [`StringHelper.GenerateSearchKey`](backend/src/AlumniApi/Helpers/StringHelper.cs)
+- 🧭 **Where it's used:** [`MembershipController.SubmitApplication`](backend/src/AlumniApi/Controllers/MembershipController.cs)
+- 🌍 **Map endpoint:** [`MembershipController.GetMap`](backend/src/AlumniApi/Controllers/MembershipController.cs)
+- ⚙️ **HttpClient setup:** [`Program.cs` (AddHttpClient)](backend/src/AlumniApi/Program.cs)
 
 ➡️ Details: [`docs/geocoding.md`](docs/geocoding.md)
 
