@@ -8,7 +8,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AlumniContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddHttpClient<IGeocodingService, LocationService>(client =>
+builder.Services.AddHttpClient<IGeocodingService, Geocoding>(client =>
 {
     client.BaseAddress = new Uri("https://nominatim.openstreetmap.org/");
     client.DefaultRequestHeaders.UserAgent.ParseAdd("AlumniAppPortfolio/1.0 (contact: developer@example.com)");
