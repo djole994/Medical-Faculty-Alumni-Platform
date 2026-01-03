@@ -22,9 +22,6 @@ To solve this, I implemented a **"Fallback-First" Caching Strategy**:
 > **📉 Impact:** This architecture ensures **100% data availability**. Every user is mapped immediately (at least to their country level), while API usage is minimized strictly to new, unique locations.
 
 #### Geocoding Workflow Diagram
-![Geocoding Workflow Diagram](docs/images/geocoding-workflow.png)
-
-#### Geocoding Workflow Diagram
 ![Smart Geocoding Workflow Diagram](../assets/diagrams/geocoding-flowchart.svg)
 
 ## 🔗 Key code references
