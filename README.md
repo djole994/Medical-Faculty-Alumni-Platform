@@ -40,7 +40,7 @@ Replacing outdated lists and manual workflows, the application provides a modern
 
 ## 🚀 Key Challenges & Solutions
 
-### 1. Intelligent Geocoding & Hybrid Caching
+### 1. Intelligent Geocoding & Fallback-First Caching
 
 One of the primary engineering goals was to map users worldwide accurately without overloading external APIs, while still handling typos and imperfect data entry gracefully.
 
