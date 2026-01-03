@@ -1,18 +1,23 @@
 
-### Intelligent Geocoding & Hybrid Caching
+### Intelligent Geocoding & Fallback-First Caching
 
-One of the primary engineering goals was to map users worldwide accurately without overloading external APIs, while still handling typos and imperfect data entry gracefully.
+One of the primary engineering goals was to map users worldwide accurately without overloading external APIs, while ensuring no profile ever remains "locationless" due to typos or API failures.
 
-To solve this, I implemented a **Hybrid Caching Strategy** with smart fallback logic:
+To solve this, I implemented a "Fallback-First" Caching Strategy:
 
-1. **Check the local `GeoCache`** first (Layer 1) to prevent redundant API calls.
-2. If missing, request coordinates from **Nominatim API** (Layer 2).
-3. If the API can’t resolve the city (e.g., due to a typo), the system:
-   - Automatically falls back to **Country center coordinates**.
-   - Flags the profile for **manual admin verification**.
+Cache Lookup: The system first checks the local GeoCache using a composite key (City|Country). If found, it serves the coordinates immediately (0 API calls).
 
-> **Impact:** This approach reduced external API calls by approx. 80% during testing and prevents the "empty map" issue for users with misspelled cities.
+Immediate Fallback (Safety Net): If the city is missing from the cache, the system immediately creates a database record using the Country's known center coordinates and flags it as IsVerified = false. This guarantees the user is mapped instantly, even before the external request.
 
+API Refinement: Only then does the system query the Nominatim API.
+
+Verification:
+
+Success: If the API resolves the exact city, the database record is updated with the precise coordinates and set to IsVerified = true.
+
+Failure (Typo/Error): The system silently keeps the previously saved Country coordinates. The profile remains functional but flagged for admin review.
+
+Impact: This architecture ensures 100% data availability. Every user is mapped immediately (at least to their country level), while API usage is minimized strictly to new, unique locations.
 #### Geocoding Workflow Diagram
 ![Smart Geocoding Workflow Diagram](../assets/diagrams/geocoding-flowchart.svg)
 
@@ -42,9 +47,6 @@ To solve this, I implemented a **Hybrid Caching Strategy** with smart fallback l
 ### Frontend (World Map)
 - 🗺️ **World map component:**  
   - [`WorldMap` / `MapPage`](../frontend/src/components/WorldMap/WorldMap.jsx)
-
-- 🔌 **API client (fetch map markers):**  
-  - [`api client / axios`](../frontend/src/api/httpClient.js)
 
 
 
