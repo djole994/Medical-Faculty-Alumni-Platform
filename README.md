@@ -46,13 +46,27 @@ One of the primary engineering goals was to map users worldwide accurately witho
 #### Geocoding Workflow Diagram
 ![Smart Geocoding Workflow Diagram](assets/diagrams/geocoding-flowchart.svg)
 
-### 🔎 Key code (jump to implementation)
+### 🔎 Key Code Highlights
 
-- 🧠 **Geocoding core:** [`GeocodingService.ResolveLocationAsync`](backend/src/AlumniApi/Services/Geocoding/Geocoding.cs)
-- 🧩 **Cache key generator:** [`StringHelper.GenerateSearchKey`](backend/src/AlumniApi/Helpers/StringHelper.cs)
-- 🧭 **Where it's used:** [`MembershipController.SubmitApplication`](backend/src/AlumniApi/Controllers/MembershipController.cs)
-- 🌍 **Map endpoint:** [`MembershipController.GetMap`](backend/src/AlumniApi/Controllers/MembershipController.cs)
-- ⚙️ **HttpClient setup:** [`Program.cs`](backend/src/AlumniApi/Program.cs)
+Here are the critical parts of the backend architecture:
+
+* **📍 The Brain (Geocoding Logic)**
+    * Implementation of the hybrid caching strategy.
+    * 👉 [`GeocodingService.ResolveLocationAsync`](backend/src/AlumniApi/Services/Geocoding/Geocoding.cs)
+
+* **🛡️ Data Integrity**
+    * Standardizing input for cache lookups.
+    * 👉 [`StringHelper.GenerateSearchKey`](backend/src/AlumniApi/Helpers/StringHelper.cs)
+
+* **🔌 API Endpoints**
+    * **Submit Application:** Orchestrates the validation and saving process.
+        [`MembershipController.SubmitApplication`](backend/src/AlumniApi/Controllers/MembershipController.cs)
+    * **Public Map:** Returns locations for the heatmap/clusters.
+        [`MembershipController.GetMap`](backend/src/AlumniApi/Controllers/MembershipController.cs)
+
+* **⚙️ Setup & DI**
+    * Configuring `HttpClient` headers for Nominatim compliance.
+    * 👉 [`Program.cs`](backend/src/AlumniApi/Program.cs)
 
 ➡️ Details: [`docs/geocoding.md`](docs/geocoding.md)
 
