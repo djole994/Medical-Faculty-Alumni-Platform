@@ -3,21 +3,27 @@
 
 One of the primary engineering goals was to map users worldwide accurately without overloading external APIs, while ensuring no profile ever remains "locationless" due to typos or API failures.
 
-To solve this, I implemented a "Fallback-First" Caching Strategy:
+To solve this, I implemented a **"Fallback-First" Caching Strategy**:
 
-Cache Lookup: The system first checks the local GeoCache using a composite key (City|Country). If found, it serves the coordinates immediately (0 API calls).
+1.  **🔍 Cache Lookup (Layer 1)**
+    The system first checks the local `GeoCache` using a composite key (`City|Country`). If found, it serves the coordinates immediately (**0 API calls**).
 
-Immediate Fallback (Safety Net): If the city is missing from the cache, the system immediately creates a database record using the Country's known center coordinates and flags it as IsVerified = false. This guarantees the user is mapped instantly, even before the external request.
+2.  **🛡️ Immediate Fallback (Safety Net)**
+    If the city is missing from the cache, the system **immediately creates a database record** using the *Country's* known center coordinates and flags it as `IsVerified = false`.
+    * *Result:* This guarantees the user is mapped instantly, even before the external request is made.
 
-API Refinement: Only then does the system query the Nominatim API.
+3.  **📡 API Refinement (Layer 2)**
+    Only after the fallback is secured does the system query the **Nominatim API** in the background.
 
-Verification:
+4.  **✅ Verification & Update**
+    * **Success:** If the API resolves the exact city, the database record is **updated** with the precise coordinates and set to `IsVerified = true`.
+    * **Failure (Typo/Error):** The system silently keeps the previously saved Country coordinates. The profile remains functional on the map but is flagged for **admin review**.
 
-Success: If the API resolves the exact city, the database record is updated with the precise coordinates and set to IsVerified = true.
+> **📉 Impact:** This architecture ensures **100% data availability**. Every user is mapped immediately (at least to their country level), while API usage is minimized strictly to new, unique locations.
 
-Failure (Typo/Error): The system silently keeps the previously saved Country coordinates. The profile remains functional but flagged for admin review.
+#### Geocoding Workflow Diagram
+![Geocoding Workflow Diagram](docs/images/geocoding-workflow.png)
 
-Impact: This architecture ensures 100% data availability. Every user is mapped immediately (at least to their country level), while API usage is minimized strictly to new, unique locations.
 #### Geocoding Workflow Diagram
 ![Smart Geocoding Workflow Diagram](../assets/diagrams/geocoding-flowchart.svg)
 
