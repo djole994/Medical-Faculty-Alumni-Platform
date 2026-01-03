@@ -21,7 +21,7 @@ To solve this, I implemented a **Hybrid Caching Strategy** with smart fallback l
 ### Backend (API)
 - 🧠 **Geocoding service (core flow):**  
   - [`GeocodingService.cs`](../backend/src/AlumniApi/Services/Geocoding/Geocoding.cs)
-  - Interface: [`IGeocodingService.cs`](../backend/src/AlumniApi/Services/Geocoding/IGeocodingService.cs)
+  - Interface: [`IGeocodingService.cs`](../backend/src/AlumniApi/Services/Geocoding/IGeocoding.cs)
 
 - 🧩 **Normalization / cache-key:**  
   - [`StringHelper.cs`](../backend/src/AlumniApi/Helpers/StringHelper.cs)
