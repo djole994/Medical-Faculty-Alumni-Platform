@@ -50,7 +50,6 @@ One of the primary engineering goals was to map users worldwide accurately witho
 
 - 🧠 **Geocoding Core Logic**
   [`GeocodingService.ResolveLocationAsync`](backend/src/AlumniApi/Services/Geocoding/Geocoding.cs)
-  
   *The heart of the system: handles local cache checks, API requests, and fallback saving.*
 
 - 🧩 **Cache Key Generator**
