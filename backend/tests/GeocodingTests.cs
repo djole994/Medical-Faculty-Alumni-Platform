@@ -64,7 +64,7 @@ public class GeocodingTests
         await _fakeDb.SaveChangesAsync();
 
         // Pravimo servis sa dummy klijentom (neće se ni pozvati1)
-        var service = new LocationService(_fakeDb, new HttpClient());
+        var service = new Geocoding(_fakeDb, new HttpClient());
 
         // --- ACT ---
         var result = await service.ResolveLocationAsync(city, country);
@@ -85,7 +85,7 @@ public class GeocodingTests
         var jsonResponse = "[{\"lat\": \"44.538\", \"lon\": \"18.667\", \"display_name\": \"Banja Luka, BiH\"}]";
 
         var mockHttp = CreateMockHttpClient(jsonResponse);
-        var service = new LocationService(_fakeDb, mockHttp);
+        var service = new Geocoding(_fakeDb, mockHttp);
 
         // --- ACT ---
         var result = await service.ResolveLocationAsync(city, country);
@@ -110,7 +110,7 @@ public class GeocodingTests
 
         // API vraća prazan niz [] (nije našao grad) ili grešku
         var mockHttp = CreateMockHttpClient("[]");
-        var service = new LocationService(_fakeDb, mockHttp);
+        var service = new Geocoding(_fakeDb, mockHttp);
 
         // --- ACT ---
         var result = await service.ResolveLocationAsync("NepostojeciGrad", country);
