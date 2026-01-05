@@ -46,6 +46,9 @@ To solve this, I implemented a **"Fallback-First" Caching Strategy**:
 
 - ⚙️ **HttpClient configuration:**  
   - [`Program.cs`](../backend/src/AlumniApi/Program.cs)
+ 
+  - - ⚙️ **Unit test Geocoding:**  
+  - [`GeocodingTests.cs`](../backend/tests/GeocodingTests.cs)
 
 ### Frontend (World Map)
 - 🗺️ **World map component:**  
