@@ -38,6 +38,9 @@ To solve this, I implemented a **"Fallback-First" Caching Strategy**:
 - 🗃️ **Data models / caching table:** - [`GeoCache model`](../backend/src/AlumniApi/Models/GeoCache.cs)  
   - (optional) DbContext: [`AlumniContext`](../backend/src/AlumniApi/Models/AlumniContext.cs)
 
+- 🌐 **Country fallback seed (default country coordinates):**
+  - [`001_countries.sql`](../backend/scripts/seed/001_countries.sql)
+    
 - ⚙️ **HttpClient configuration:** - [`Program.cs`](../backend/src/AlumniApi/Program.cs)
 
 - 🧪 **Unit Testing (QA):** - [`GeocodingTests.cs`](../backend/tests/GeocodingTests.cs) _(Validates cache hits, API integration & fallback logic)_
@@ -49,4 +52,6 @@ To solve this, I implemented a **"Fallback-First" Caching Strategy**:
 This architecture was specifically chosen to meet two critical client requirements:
 1.  **Zero-Cost Operation:** The client required a sustainable system without recurring monthly costs (e.g., Google Maps API billing). Using Nominatim (OpenStreetMap) solved this but required strict rate-limiting and caching.
 2.  **100% Data Integrity:** While automation handles 95% of cases, the "Admin Review" feature ensures that no user is ever lost or mapped incorrectly due to API limitations.
-    * *Note:* Critical logic (such as the fallback mechanism) is covered by **Unit Tests** to prevent regression.
+    * *Note:* Critical logic (such as the fallback mechanism) is covered by **Unit Tests** to prevent regression. Country-level fallback coordinates come from a small reference dataset seeded via
+[`001_countries.sql`](../backend/scripts/seed/001_countries.sql).
+
