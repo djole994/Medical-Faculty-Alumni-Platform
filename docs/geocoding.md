@@ -39,7 +39,7 @@ To solve this, I implemented a **"Fallback-First" Caching Strategy**:
   - (optional) DbContext: [`AlumniContext`](../backend/src/AlumniApi/Models/AlumniContext.cs)
 
 - 🌐 **Country fallback seed (default country coordinates):**
-  - [`001_countries.sql`](../backend/scripts/seed/001_countries.sql)
+  - [`001_countries.sql`](../backend/scripts/001_countries.sql)
     
 - ⚙️ **HttpClient configuration:** - [`Program.cs`](../backend/src/AlumniApi/Program.cs)
 
