@@ -250,4 +250,7 @@ FROM (VALUES
 
 -- Z
 ('Zambia', 'ZM', -13.1339, 27.8493),
-('Zimbabwe', 'ZW', -19.0154, 29.1549);
+('Zimbabwe', 'ZW', -19.0154, 29.1549)) v(Name, IsoCode, DefaultLatitude, DefaultLongitude)
+WHERE NOT EXISTS (
+  SELECT 1 FROM dbo.Countries c WHERE c.IsoCode = v.IsoCode
+);
